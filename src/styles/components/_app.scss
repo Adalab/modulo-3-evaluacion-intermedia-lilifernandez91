@@ -1,0 +1,70 @@
+.app-container{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 50px;
+}
+
+.phrases-header{
+    margin-bottom: 25px;
+    
+    .phrases-header-filters{
+        display: flex;
+
+        .phrases-filter{
+            height: 35px;
+            border-radius: 4px;
+            border: 1px solid rgba($color: #000000, $alpha: 0.2);
+        }
+
+        .phrases-filter-phrase{
+            margin-right: 15px;
+        }
+    }
+}
+
+.phrase-list{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .phrase-element{
+        width: 50%;
+        list-style: none;
+        border: 1px solid rgba($color: #000000, $alpha: 0.16);
+        padding: 10px 15px;
+        margin-bottom: 15px;
+    }
+}
+
+.add-new-phrase{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+    .new-phrase-inputs{
+        display: flex;
+
+        .new-phrase-input{
+            height: 35px;
+            border-radius: 4px;
+            border: 1px solid rgba($color: #000000, $alpha: 0.2);
+        }
+
+        .new-phrase-input-left{
+            margin-right: 15px;
+        }
+
+    }
+    .new-phrase-submit{
+        height: 35px;
+        padding: 5px 15px;
+        border: none;
+        border-radius: 4px;
+        background: #ccc;
+        margin-top: 15px;
+    }
+}
