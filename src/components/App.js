@@ -1,127 +1,145 @@
-import { useEffect, useState } from "react";
 import "../styles/App.scss";
-import objectExport from "../services/fetch";
+import getDataApi from "../services/fetch";
+import { useEffect, useState } from "react";
 
 function App() {
+  //variables de estado
   const [phrases, setPhrases] = useState([]);
   const [newPhrase, setNewPhrase] = useState({
     quote: "",
     character: "",
   });
-  const [filters, setFilters] = useState({
-    filterPhrase: "",
-    filterCharacter: "",
-  });
+  const [filters, setFilters] = useState("");
+  const [filtersCharacter, setFiltersCharacter] = useState("all");
 
+  //Hacer un hook para traer los datos de la Api
   useEffect(() => {
-    objectExport.getDataApi().then((data) => {
+    getDataApi().then((data) => {
       setPhrases(data);
     });
   }, []);
 
-  
-  const html = phrases.filter(p => p && p.quote && p.quote.toLowerCase().includes(filters.filterPhrase.toLowerCase())).filter(p => p && p.character && p.character.toLowerCase().includes(filters.filterCharacter.toLowerCase())).map((phrasesItem, i) => {
+  //Renderizar los datos. Map recibe como parametro una funcion de tipo arrow. El map recorre el array y por cada elemento del array retorna un li con las frases.
+  const htmlPhrases = phrases
+  .filter((item) => {
+    return item.quote.toLowerCase().includes(filters.toLowerCase())
+  })
+
+  .filter((item) => {
+    if(filtersCharacter === 'all'){
+      return true
+    }
+    return item.character.includes(filtersCharacter)
+  })
+
+  .map((item, index) => {
     return (
-      <li key={i} className="phrase-element">
-        <span className="title">{phrasesItem.quote}</span>{" "}
-        {phrasesItem.character}
+      <li className="list-element" key={index}>
+        {`${item.quote} - ${item.character}`}
       </li>
     );
   });
 
+  //Añadir una nueva frase
   const handleNewPhrase = (ev) => {
     ev.preventDefault();
     setNewPhrase({
       ...newPhrase,
-      [ev.target.id]: ev.target.value,
+      [ev.target.name]: ev.target.value,
     });
   };
 
-  const handleFilters = (ev) => {
-    ev.preventDefault();
-    setFilters({
-      ...filters,
-      [ev.target.id]: ev.target.value,
-    });
-  };
-
+  //Boton añadir nueva frase
   const handleAddNewPhrase = (ev) => {
     ev.preventDefault();
+    if(newPhrase.quote === "" || newPhrase.character === ""){
+      return
+    }
     setPhrases([...phrases, newPhrase]);
     setNewPhrase({
       quote: "",
       character: "",
-    });
+    })
+  
+  }
+
+  //Filtrar por frase
+  const handleFilters = (ev) => {
+    ev.preventDefault();
+    setFilters(ev.target.value);
   };
 
+  //Filtrar por personajes
+  const handleFiltersCharacter = (ev) => {
+    ev.preventDefault();
+    setFiltersCharacter(ev.target.value);
+  }
+
   return (
-    <div className="app-container">
-      <header className="phrases-header">
-        <h1>Frases de Friends</h1>
-        <div className="phrases-header-filters">
-          <div>
-            <p>Filtrar por frase</p>
-            <input
-              className="phrases-filter phrases-filter-phrase"
-              value={filters.filterPhrase}
-              onChange={handleFilters}
-              type="text"
-              name="filterPhrase"
-              id="filterPhrase"
-              placeholder="Frase"
-            ></input>
-          </div>
-          <div>
-            <p>Filtrar por personaje</p>
-            <input
-              className="phrases-filter"
-              value={filters.filterCharacter}
-              onChange={handleFilters}
-              type="text"
-              name="filterCharacter"
-              id="filterCharacter"
-              placeholder="Character"
-            ></input>
-          </div>
-        </div>
+    <div className="container-div">
+      <header>
+        {/* Frases de Friends */}
+        <h1 className="title-h1">Frases de Friends</h1>
+        <form className="form-header">
+          {/* Filtrar por frase */}
+          <label className="filter-phrase">
+            Filtrar por frase
+            <input className="input-header"
+            type="text" 
+            name="quote"
+            value={filters}
+            onChange={handleFilters}>
+            </input>
+          </label>
+          {/* Filtrar por personaje */}
+          <label className="filter-character">
+            Filtrar por personaje
+            <select 
+            className="input-header"
+            onChange={handleFiltersCharacter}
+            value={filtersCharacter}>
+              <option value="all">Todos</option>
+              <option value="Ross">Ross</option>
+              <option value="Mónica">Mónica</option>
+              <option value="Joey">Joey</option>
+              <option value="Phoebe">Phoebe</option>
+              <option value="Chandler">Chandler</option>
+              <option value="Rachel">Rachel</option>
+            </select>
+          </label>
+        </form>
       </header>
 
       <main>
-        <ul className="phrase-list">{html}</ul>
-        <section className="add-new-phrase">
-          <form onSubmit={(ev) => handleAddNewPhrase(ev)}>
-            <h2>Añadir una nueva frase</h2>
-            <div className="new-phrase-inputs">
-              <div>
-                <p>Frase</p>
-                <input
-                  className="new-phrase-input new-phrase-input-left"
-                  value={newPhrase.quote}
-                  onChange={handleNewPhrase}
-                  type="text"
-                  name="quote"
-                  id="quote"
-                  placeholder="Quote"
-                ></input>
-              </div>
-              <div>
-                <p>Personaje</p>
-                <input
-                  className="new-phrase-input"
-                  value={newPhrase.character}
-                  onChange={handleNewPhrase}
-                  type="text"
-                  name="character"
-                  id="character"
-                  placeholder="Personaje"
-                ></input>
-              </div>
-            </div>
-            <button type="submit" className="new-phrase-submit">
-              Añadir una nueva frase
-            </button>
-          </form>
-        </section>
+        {/* Lista de frases */}
+        <ul className="list">{htmlPhrases}</ul>
+        {/* Añadir nueva frase */}
+        <h2 className="title-h2">Añadir una nueva frase</h2>
+        <form className="form-main">
+          {/* Añadir frase */}
+          <label className="add-phrase">
+            Frase
+            <input className="input-main" type="text" name="quote"
+            value={newPhrase.quote} 
+            onChange={handleNewPhrase}>
+            </input>
+          </label>
+          {/* Añadir personaje */}
+          <label>
+            Personaje
+            <input className="input-main" type="text" name="character"
+            value={newPhrase.character}
+            onChange={handleNewPhrase}>
+            </input>
+          </label>
+        </form>
+        {/* Boton añadir */}
+        <div className="button">
+          <button className="add-button" 
+          onClick={handleAddNewPhrase}>
+            Añadir nueva frase
+          </button>
+        </div>
       </main>
     </div>
   );
