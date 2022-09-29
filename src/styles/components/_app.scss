@@ -1,60 +1,93 @@
 .container-div {
+  display: flex;
+  flex-direction: column;
+
+  header {
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjQ_5eHj_AHkxXfUMluih9agRO5ucaTHm2vg&usqp=CAU");
+    color: rgb(189, 66, 145);
+    background-size: cover;
+
+    .title-h1 {
+      text-align: center;
+    }
+
+    .form-header {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 25px;
+
+      .filter-phrase {
+        font-size: 24px;
+        font-weight: 600;
+      }
+
+      .input-phrase {
+        margin-left: 53px;
+        font-size: 16px;
+        width: 124px;
+      }
+
+      .filter-character {
+        font-size: 24px;
+        font-weight: 600;
+      }
+
+      .input-character {
+        margin-left: 4px;
+        font-size: 16px;
+        width: 131px;
+        color: rgb(83, 191, 157);
+      }
+    }
+  }
+
+  main {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
 
-    .title-h1{
-        text-align: center;
-        margin-top: 15px;
-        margin-bottom: 15px;
-    }
+    .list {
+      list-style: none;
+      padding: 0;
 
-   .form-header{
-    margin-bottom: 25px;
-
-    .filter-phrase{
-        margin-right: 25px;
-    }
-
-    .input-header{
-        margin-left: 8px;
-    }
-   }
-
-   .list{
-    list-style: none;
-
-    .list-element{
-        border: 1px solid grey;
+      .list-element {
+        border: 1px solid rgb(189, 66, 145);
         margin-bottom: 8px;
-        width: 50vh;
-    }
-   }
-
-   .title-h2{
-    text-align: center;
-    margin-top: 25px;
-    margin-bottom: 20px;
-   }
-
-   .form-main{
-    margin-bottom: 25px;
-    display: flex;
-    justify-content: center;
-
-    .add-phrase{
-        margin-right: 30px;
+        color: rgb(83, 191, 157);
+      }
     }
 
-    .input-main{
+    .title-h2 {
+      text-align: center;
+      color: rgb(189, 66, 145);
+    }
+
+    .form-main {
+      margin-bottom: 25px;
+      display: flex;
+      text-align: center;
+
+      .add-phrase {
+        color: rgb(83, 191, 157);
+      }
+
+      .input-main {
         margin-left: 8px;
+        border: 1px solid rgb(189, 66, 145);
+      }
     }
-   }
 
-   .button{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-   }
+    .button {
+      display: flex;
+      justify-content: center;
+
+      .add-button {
+        background-color: rgb(189, 66, 145);
+        color: rgb(83, 191, 157);
+        border: none;
+        border-radius: 5px;
+        width: 148px;
+        height: 36px;
+      }
+    }
+  }
 }

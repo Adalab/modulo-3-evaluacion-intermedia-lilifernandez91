@@ -84,7 +84,7 @@ function App() {
           {/* Filtrar por frase */}
           <label className="filter-phrase">
             Filtrar por frase
-            <input className="input-header"
+            <input className="input-phrase"
             type="text" 
             name="quote"
             value={filters}
@@ -95,7 +95,7 @@ function App() {
           <label className="filter-character">
             Filtrar por personaje
             <select 
-            className="input-header"
+            className="input-character"
             onChange={handleFiltersCharacter}
             value={filtersCharacter}>
               <option value="all">Todos</option>
@@ -125,7 +125,7 @@ function App() {
             </input>
           </label>
           {/* Añadir personaje */}
-          <label>
+          <label className="add-phrase">
             Personaje
             <input className="input-main" type="text" name="character"
             value={newPhrase.character}
