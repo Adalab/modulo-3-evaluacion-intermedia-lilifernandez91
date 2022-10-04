@@ -3,12 +3,12 @@
   flex-direction: column;
 
   header {
-    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjQ_5eHj_AHkxXfUMluih9agRO5ucaTHm2vg&usqp=CAU");
     color: rgb(189, 66, 145);
-    background-size: cover;
 
     .title-h1 {
       text-align: center;
+      color: rgb(189, 66, 145);
+      font-size: 42px;
     }
 
     .form-header {
@@ -25,6 +25,11 @@
         margin-left: 53px;
         font-size: 16px;
         width: 124px;
+
+        @media (max-width: 370px) {
+          margin-right: 55px;
+          margin-left: 0;
+        }
       }
 
       .filter-character {
@@ -64,6 +69,7 @@
     .form-main {
       margin-bottom: 25px;
       display: flex;
+      justify-content: space-around;
       text-align: center;
 
       .add-phrase {
