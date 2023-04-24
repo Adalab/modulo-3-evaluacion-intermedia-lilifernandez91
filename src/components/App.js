@@ -21,24 +21,24 @@ function App() {
 
   //Renderizar los datos. Map recibe como parametro una funcion de tipo arrow. El map recorre el array y por cada elemento del array retorna un li con las frases.
   const htmlPhrases = phrases
-  .filter((item) => {
-    return item.quote.toLowerCase().includes(filters.toLowerCase())
-  })
+    .filter((item) => {
+      return item.quote.toLowerCase().includes(filters.toLowerCase())
+    })
 
-  .filter((item) => {
-    if(filtersCharacter === 'all'){
-      return true
-    }
-    return item.character.includes(filtersCharacter)
-  })
+    .filter((item) => {
+      if (filtersCharacter === 'all') {
+        return true
+      }
+      return item.character.includes(filtersCharacter)
+    })
 
-  .map((item, index) => {
-    return (
-      <li className="list-element" key={index}>
-        {`${item.quote} - ${item.character}`}
-      </li>
-    );
-  });
+    .map((item, index) => {
+      return (
+        <li className="list-element" key={index}>
+          {`${item.quote} - ${item.character}`}
+        </li>
+      );
+    });
 
   //Añadir una nueva frase
   const handleNewPhrase = (ev) => {
@@ -52,7 +52,7 @@ function App() {
   //Boton añadir nueva frase
   const handleAddNewPhrase = (ev) => {
     ev.preventDefault();
-    if(newPhrase.quote === "" || newPhrase.character === ""){
+    if (newPhrase.quote === "" || newPhrase.character === "") {
       return
     }
     setPhrases([...phrases, newPhrase]);
@@ -60,7 +60,7 @@ function App() {
       quote: "",
       character: "",
     })
-  
+
   }
 
   //Filtrar por frase
@@ -85,19 +85,19 @@ function App() {
           <label className="filter-phrase">
             Filtrar por frase
             <input className="input-phrase"
-            type="text" 
-            name="quote"
-            value={filters}
-            onChange={handleFilters}>
+              type="text"
+              name="quote"
+              value={filters}
+              onChange={handleFilters}>
             </input>
           </label>
           {/* Filtrar por personaje */}
           <label className="filter-character">
             Filtrar por personaje
-            <select 
-            className="input-character"
-            onChange={handleFiltersCharacter}
-            value={filtersCharacter}>
+            <select
+              className="input-character"
+              onChange={handleFiltersCharacter}
+              value={filtersCharacter}>
               <option value="all">Todos</option>
               <option value="Ross">Ross</option>
               <option value="Mónica">Mónica</option>
@@ -120,23 +120,23 @@ function App() {
           <label className="add-phrase">
             Frase
             <input className="input-main" type="text" name="quote"
-            value={newPhrase.quote} 
-            onChange={handleNewPhrase}>
+              value={newPhrase.quote}
+              onChange={handleNewPhrase}>
             </input>
           </label>
           {/* Añadir personaje */}
           <label className="add-phrase">
             Personaje
             <input className="input-main" type="text" name="character"
-            value={newPhrase.character}
-            onChange={handleNewPhrase}>
+              value={newPhrase.character}
+              onChange={handleNewPhrase}>
             </input>
           </label>
         </form>
         {/* Boton añadir */}
         <div className="button">
-          <button className="add-button" 
-          onClick={handleAddNewPhrase}>
+          <button className="add-button"
+            onClick={handleAddNewPhrase}>
             Añadir nueva frase
           </button>
         </div>
